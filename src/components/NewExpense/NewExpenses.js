@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import './NewExpenses.css'
 import ExpensesForm from "./ExpensesForm";
+import { v4 as uuid } from 'uuid';
 
 const NewExpenses = (props) => {
     const [add,setAdd] = useState(false)
@@ -8,7 +9,7 @@ const NewExpenses = (props) => {
     const saveExpenseDataHandler = (enteredExpenseData) => {
         const expenseData = {
             ...enteredExpenseData,
-            id:Math.random().toString()
+            id: uuid()
         }
         props.onAddExpense(expenseData)
         setAdd(false)
