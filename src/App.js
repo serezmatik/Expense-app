@@ -1,11 +1,11 @@
 import Expenses from "./components/Expenses/Expenses";
 import NewExpenses from "./components/NewExpense/NewExpenses";
-import React, {useState} from "react";
+import React from "react";
 
 const expenses = [
     {
         id: 'e1',
-        title: 'Subscription',
+        title: 'new expense',
         amount: 294,
         date: new Date(2021, 3, 8)
     },
