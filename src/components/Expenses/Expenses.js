@@ -6,11 +6,13 @@ import ExpensesList from "./ExpensesList";
 
 
 function Expenses(props) {
-    const [filterYear, setFilterYear] = useState('2021')
+    const [filterYear, setFilterYear] = useState(' ')
 
+    console.log(props.items)
     const filterChangeHandler = selected => {
         setFilterYear(selected)
     }
+
     const filtered = props.items.filter(expense => {
         return expense.date.getFullYear().toString() === filterYear
     })

@@ -51,10 +51,12 @@ export default function ExpensesForm(props) {
     const submitHandler = (event) => {
         event.preventDefault()
 
+        const convertedDate =  new Date(enteredDate).toISOString()
+
         const expenseData = {
             title: enteredTitle,
-            amount: enteredAmount,
-            date: new Date(enteredDate)
+            amount: parseInt(enteredAmount),
+            date: convertedDate
         }
         props.onSaveExpenseData(expenseData)
         setEnteredDate('')

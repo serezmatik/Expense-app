@@ -1,8 +1,8 @@
 import Expenses from "./components/Expenses/Expenses";
 import NewExpenses from "./components/NewExpense/NewExpenses";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
-const expenses = [
+const expensesInit = [
     {
         id: 'e1',
         title: 'Subscription',
@@ -31,18 +31,27 @@ const expenses = [
 
 function App() {
 
+    const [expenses, setExpenses] = useState([])
 
+    useEffect(() => {
+        localStorage.setItem('data', JSON.stringify(expensesInit));
+    }, []);
 
-  const addExpenseHandler = expenses =>{
-    console.log('In App.js')
-    console.log(expenses)
-  }
-  return (
-    <div>
-      <NewExpenses onAddExpense={addExpenseHandler}/>
-      <Expenses items={expenses} />
-    </div>
-  );
+    const addExpenseHandler = data => {
+
+        const expensesPrevious = JSON.parse(localStorage.getItem("data"))
+
+        expensesPrevious.push(data)
+
+        localStorage.setItem('data', JSON.stringify(expensesPrevious));
+
+    }
+    return (
+        <div>
+            <NewExpenses onAddExpense={addExpenseHandler} />
+            <Expenses items={JSON.parse(localStorage.getItem("data"))}/>
+        </div>
+    );
 }
 
-export default App; 
+export default App;
