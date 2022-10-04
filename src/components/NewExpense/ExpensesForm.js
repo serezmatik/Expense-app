@@ -51,7 +51,7 @@ export default function ExpensesForm(props) {
     const submitHandler = (event) => {
         event.preventDefault()
 
-        const convertedDate =  new Date(enteredDate).toISOString()
+        const convertedDate =  new Date(enteredDate)
 
         const expenseData = {
             title: enteredTitle,

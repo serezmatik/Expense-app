@@ -31,25 +31,38 @@ const expensesInit = [
 
 function App() {
 
-    const [expenses, setExpenses] = useState([])
+    const [expenses, setExpenses] = useState(expensesInit)
 
-    useEffect(() => {
-        localStorage.setItem('data', JSON.stringify(expensesInit));
-    }, []);
+    // useEffect(() => {
+    //
+    //     localStorage.setItem('data', JSON.stringify(expensesInit));
+    //     parseExpenses(JSON.parse(localStorage.getItem("data")))
+    //
+    // }, [expenses]);
 
     const addExpenseHandler = data => {
 
         const expensesPrevious = JSON.parse(localStorage.getItem("data"))
-
         expensesPrevious.push(data)
-
         localStorage.setItem('data', JSON.stringify(expensesPrevious));
 
+        parseExpenses(JSON.parse(localStorage.getItem("data")))
     }
+
+    const parseExpenses = (e) => {
+
+        const exp = e.map(r => {
+            r["date"] = new Date(r.date)
+            //parsujemy date ze stringa na typ Date
+            return r
+        })
+        setExpenses(exp)
+    }
+
     return (
         <div>
-            <NewExpenses onAddExpense={addExpenseHandler} />
-            <Expenses items={JSON.parse(localStorage.getItem("data"))}/>
+            <NewExpenses onAddExpense={addExpenseHandler}/>
+            <Expenses items={expenses}/>
         </div>
     );
 }
